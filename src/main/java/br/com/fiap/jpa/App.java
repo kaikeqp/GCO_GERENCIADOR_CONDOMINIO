@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import br.com.fiap.jpa.dao.impl.VisitanteDAOImpl;
 import br.com.fiap.jpa.models.Condominio;
 import br.com.fiap.jpa.models.FuncPortaria;
 import br.com.fiap.jpa.models.MovimentacaoPortaria;
@@ -50,7 +49,6 @@ public class App {
 		f2 = funcService.obter(2l);
 		
 		System.out.println("======================CADASTRO MOVIMENTACOES======================");
-
 		MovimentacaoPortaria m1 = new MovimentacaoPortaria("E",LocalDateTime.of(LocalDate.of(2022, 6, 1), LocalTime.of(15, 0)), v1, f1, p1);
 		MovimentacaoPortaria m2 = new MovimentacaoPortaria("E",LocalDateTime.of(LocalDate.of(2022, 6, 1), LocalTime.of(15, 30)), v2, f1, p1);
 		MovimentacaoPortaria m3 = new MovimentacaoPortaria("S",LocalDateTime.of(LocalDate.of(2022, 6, 1), LocalTime.of(15, 45)), v2, f1, p1);
@@ -63,6 +61,11 @@ public class App {
 		movPortariaService.listarPorTipo("E").forEach(System.out::println);
 		movPortariaService.listarPorTipo("S").forEach(System.out::println);
 
+		System.out.println("======================BUSCA VISISTANTES CADASTRADOS NOME/CPF/DATA DE CADASTRO======================");
+		visitanteService.listarPorNomeLike("Joel").forEach(System.out::println);
+		visitanteService.listarPorCpfEqual("333.333.333-33").forEach(System.out::println);
+		visitanteService.listarPorDtCadastro(v1.getDataCadastro()).forEach(System.out::println);
+		
 	}
 	
 }

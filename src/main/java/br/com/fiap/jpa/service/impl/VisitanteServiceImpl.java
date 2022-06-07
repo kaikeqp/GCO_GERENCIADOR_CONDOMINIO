@@ -1,5 +1,6 @@
 package br.com.fiap.jpa.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import br.com.fiap.jpa.dao.impl.VisitanteDAOImpl;
@@ -88,4 +89,43 @@ public class VisitanteServiceImpl extends GenericService<Visitante, Long> {
         }
 
         return visitantes;    }
+    
+    public List<Visitante> listarPorNomeLike(String nome) {
+        List<Visitante> visitantes = null;
+        try {
+            visitantes = visitanteDAO.listarPorNomeLike(nome, getEntityManager());
+        }catch (Exception e){
+            e.printStackTrace();
+            getEntityManager().getTransaction().rollback();
+        }finally {
+            closeEntityManager();
+        }
+        return visitantes;
+    }
+    
+    public List<Visitante> listarPorCpfEqual(String nome) {
+        List<Visitante> visitantes = null;
+        try {
+            visitantes = visitanteDAO.listarPorCpfEqual(nome, getEntityManager());
+        }catch (Exception e){
+            e.printStackTrace();
+            getEntityManager().getTransaction().rollback();
+        }finally {
+            closeEntityManager();
+        }
+        return visitantes;
+    }
+    
+    public List<Visitante> listarPorDtCadastro(LocalDateTime dtCadastro) {
+        List<Visitante> visitantes = null;
+        try {
+            visitantes = visitanteDAO.listarPorDtCadastro(dtCadastro, getEntityManager());
+        }catch (Exception e){
+            e.printStackTrace();
+            getEntityManager().getTransaction().rollback();
+        }finally {
+            closeEntityManager();
+        }
+        return visitantes;
+    }
 }
